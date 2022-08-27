@@ -144,6 +144,31 @@ def get_sellability_report(melons):
         else:
             print(f"Harvested by {melon.harvested_by} from Field {melon.harvest_field} (NOT SELLABLE)")
 
+def make_melons_from_file(filename, melon_types):
+    """Returns a list of Melon objects."""
+
+    
+    melons_by_id = make_melon_type_lookup(melon_types)
+    melon_objects = []
+    open_file = open(filename)
+    count=1
+
+
+    for line in open_file:
+        mln_lne = line.split(' ')
+        # melon_input = 'melon' + str(count)
+        melon_input = Melon(melon_type = melons_by_id[mln_lne[5]],
+            shape_rating = mln_lne[1],
+            color_rating = mln_lne[3],
+            harvested_by = mln_lne[8],
+            harvested_field = mln_lne[11],
+            melon_number = 'Melon ' + str(count))
+        melon_objects.append(melon_input)
+        count+=1
+
+    # melon1 = Melon(melons_by_id['yw'], shape_rating=8, color_rating=7, harvested_field=2, harvested_by='Sheila', melon_number='Melon 1')
+    return melon_objects
+
 # Muskmelon = MelonType('musk', '1998', 'green', 'seedless', True, 'Muskmelon')
 
 # Muskmelon.update_code('musky')
@@ -156,3 +181,5 @@ def get_sellability_report(melons):
 # print(make_melons(make_melon_types())[0].melon_type.is_seedless)
 
 # get_sellability_report(make_melons(make_melon_types()))
+
+print(make_melons_from_file('harvest_log.txt', make_melon_types()))
