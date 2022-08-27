@@ -102,7 +102,7 @@ class Melon:
         self.melon_number = melon_number
 
     def __repr__(self):
-        return f'{self.name}'
+        return f'{self.melon_number}'
 
     def is_sellable(self):
         """
@@ -116,19 +116,33 @@ class Melon:
         else:
             return False
 
-
-
 def make_melons(melon_types):
     """Returns a list of Melon objects."""
 
-    # Fill in the rest
+    melons_by_id = make_melon_type_lookup(melon_types)
 
+    melon1 = Melon(melons_by_id['yw'], shape_rating=8, color_rating=7, harvested_field=2, harvested_by='Sheila', melon_number='Melon 1')
+    melon2 = Melon(melons_by_id['yw'], shape_rating=3, color_rating=4, harvested_field=2, harvested_by='Sheila', melon_number='Melon 2')    
+    melon3 = Melon(melons_by_id['yw'], shape_rating=9, color_rating=8, harvested_field=3, harvested_by='Sheila', melon_number='Melon 3')
+    melon4 = Melon(melons_by_id['cas'], shape_rating=10, color_rating=6, harvested_field=35, harvested_by='Sheila', melon_number='Melon 4')
+    melon5 = Melon(melons_by_id['cren'], 8, 9, 35, 'Michael', 'Melon 5')
+    melon6 = Melon(melons_by_id['cren'], 8, 2, 35, 'Michael', 'Melon 6')
+    melon7 = Melon(melons_by_id['cren'], 2, 3, 4, 'Michael', 'Melon 7')
+    melon8 = Melon(melons_by_id['musk'], 6, 7, 4, 'Michael', 'Melon 8')
+    melon9 = Melon(melons_by_id['yw'], 7, 10, 3, 'Sheila', 'Melon 9')
+
+    melon_objects = [melon1, melon2, melon3, melon4, melon5, melon6, melon7, melon8, melon9]
+
+    return melon_objects
 
 def get_sellability_report(melons):
     """Given a list of melon object, prints whether each one is sellable."""
 
-    # Fill in the rest
-
+    for melon in melons:
+        if melon.is_sellable() == True:
+            print(f"Harvested by {melon.harvested_by} from Field {melon.harvest_field} (CAN BE SOLD)")
+        else:
+            print(f"Harvested by {melon.harvested_by} from Field {melon.harvest_field} (NOT SELLABLE)")
 
 # Muskmelon = MelonType('musk', '1998', 'green', 'seedless', True, 'Muskmelon')
 
@@ -138,3 +152,7 @@ def get_sellability_report(melons):
 
 # melon9 = Melon('yw', 7, 10, 3, 'Sheila', 'Melon 9')
 # print(melon9.is_sellable())
+
+# print(make_melons(make_melon_types())[0].melon_type.is_seedless)
+
+# get_sellability_report(make_melons(make_melon_types()))
